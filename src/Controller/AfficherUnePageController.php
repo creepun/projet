@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Entity\Entreprise;
+use App\Entity\Formation;
+use App\Entity\Stage;
+
 class AfficherUnePageController extends AbstractController
 {
     /**
@@ -55,6 +59,27 @@ class AfficherUnePageController extends AbstractController
         $repositoryStages=$this->getDoctrine()->getRepository(Stage::class);
         $listeStages=$repositoryStages->FindBy(["entreprise"=>$id]);
         return $this->render('templates/entreprises/index.html.twig',['titreEntreprise'=>$titreEntreprise,'listeStages'=>$listeStages]);
+    }
+    /**
+     * @Route("/formations/{id},name=liste_stages_par_formation")
+     */
+    public function liste_stages_par_formation($id)
+    {
+        $repositoryFormation = $this->getDoctrine()->getRepository(Formation::class);
+        $formation=$repositoryFormation->Find($id);
+        $titreFormation=$formation->getNom();
+        $repositoryStages=$this->getDoctrine()->getRepository(Stage::class);
+        $listeStages=$repositoryStages->FindBy(["formation"=>$id]);
+        return $this->render('templates/formations/index.html.twig',['titreFormation'=>$titreEntreprise,'listeStages'=>$listeStages]);
+    }
+    /**
+     * @Route("/stages/{id},name=stage_selectionner")
+     */
+    public function stage_selectionner($id)
+    {
+        $repositoryStages=$this->getDoctrine()->getRepository(Stage::class);
+        $stage=$repositoryStages->FindBy(["stage"=>$id]);
+        return $this->render('templates/stages_id/index.html.twig',['titrestage'=>$titreEntreprise,'Stage'=>$Stage]);
     }
 }
 
