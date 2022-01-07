@@ -9,13 +9,31 @@
 </style>
 
 <div class="example-wrapper">
-    <h1> {{ controller_name }}! ✅</h1>
+    <h1> {{ controller_name }}! </h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Temp/symfony/prostages/src/Controller/AfficherUnePageController.php'|file_link(0) }}">src/Controller/AfficherUnePageController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Temp/symfony/prostages/templates/afficher_une_page/index.html.twig'|file_link(0) }}">templates/afficher_une_page/index.html.twig</a></code></li>
+    <div class="milieu">
+        <ul>
+          <li><code><a href="/entreprises">Trier par entreprise</a></code></li>
+          <li><code><a href="/formations">Trier par formation</a></code></li>
         
-    </ul>
+         </ul>
+    </div> 
+    <div class="bas">
+        <h1>Voici les stages disponibles</h1>
+        {#{% for stage in Stage %}#}
+        <ul>
+             <li>
+                <div class="stage">
+                <div class="nomStage"><h2>{#Stage.nom#}</h2></div>
+                <div class="descriptifStage"><p>{#Stage.descriptif#}</p></div>
+                <div class="bouton">
+                {#<a href="/stages_id/{{Stage.id}}"> {{Stage.nom}}#}
+                </a>
+                </div>
+
+             </li>
+        </ul>
+        {#{%endfor%}#}
+    </div>
 </div>
 {% endblock %}
