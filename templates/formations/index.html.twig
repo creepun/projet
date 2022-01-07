@@ -16,14 +16,14 @@
         {#{% for stage in Stage.formations %}#}
         <ul>
              <li>
-                <div class="stage">
-                <div class="nomStage"><h2>{#Stage.nom#}</h2></div>
-                <div class="descriptifStage"><p>{#Stage.descriptif#}</p></div>
                 <div class="bouton">
-                {#<a href="/stages_id/{{Stage.id}}"> {{Stage.nom}}#}
-                </a>
+                        {#<a href="/stages_id/{{Stage.id}}"> {{Stage.nom}}#}
+                        </a>
+                    </div>
+                    <div class="nomStage"><h2>{#Stage.nom#}</h2></div>
+                    <div class="descriptifStage"><p>{#Stage.descriptif#}</p></div>
+                
                 </div>
-
              </li>
         </ul>
         {#{%endfor%}#}
