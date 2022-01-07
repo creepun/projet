@@ -9,12 +9,8 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>  'Cette page affichera le descriptif du stage ayant pour identifiant {{controller_name}}' ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Temp/symfony/projet/src/Controller/StagesIDController.php'|file_link(0) }}">src/Controller/StagesIDController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Temp/symfony/projet/templates/stages_id/index.html.twig'|file_link(0) }}">templates/stages_id/index.html.twig</a></code></li>
-    </ul>
+    <h1>  'Cette page affichera le descriptif du stage ayant pour identifiant {{controller_name}}' </h1>
+    <h1> '{#{{Stage.nom}}#} </h1>
+    <p> '{#{{Stage.descriptif}}#} </p>
 </div>
 {% endblock %}

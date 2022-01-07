@@ -8,13 +8,24 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1> {{ controller_name }}! ✅</h1>
+<div class="entreprise">
+    <h1> {{ controller_name }}! </h1>
+    <div class="entrepriseStage">
+        <h1>Voici les stages disponibles pour cette entreprise</h1>
+        {#{% for stage in Entreprise.stage %}#}
+        <ul>
+             <li>
+                <div class="stage">
+                <div class="nomStage"><h2>{#stage.nom#}</h2></div>
+                <div class="descriptifStage"><p>{#stage.descriptif#}</p></div>
+                <div class="bouton">
+                {#<a href="/stages_id/{{stage.id}}"> {{stage.nom}}#}
+                </a>
+                </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Temp/symfony/prostages/src/Controller/EntreprisesController.php'|file_link(0) }}">src/Controller/EntreprisesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Temp/symfony/prostages/templates/entreprises/index.html.twig'|file_link(0) }}">http://127.0.0.1:8000/entreprises</a></code></li>
-    </ul>
+             </li>
+        </ul>
+        {#{%endfor%}#}
+    </div>
 </div>
 {% endblock %}
