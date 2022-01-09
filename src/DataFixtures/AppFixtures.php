@@ -34,12 +34,13 @@ class AppFixtures extends Fixture
 
         $nbRessourcesAGenerer = $faker->numberBetween($min = 4, $max = 25);
         for ($numRessource=0; $numRessource < $nbRessourcesAGenerer; $numRessource++) {
-            $ressource = new Ressource();
-            $ressource = setNom($faker->company);
-            $ressource = setActivité($faker->realText($maxNbChars = 200, $indexSize = 2));
-            $ressource = setAdresse($faker->address);
-            $ressource = setURLSite($faker->domainName);
+            $entreprise = new Entreprise();
+            $entreprise = setNom($faker->company);
+            $entreprise = setActivité($faker->realText($maxNbChars = 200, $indexSize = 2));
+            $entreprise = setAdresse($faker->address);
+            $entreprise = setURLSite($faker->domainName);
         }
+        $manager->persist($entreprise);
         $manager->flush();
     }
 }
