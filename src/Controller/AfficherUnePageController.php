@@ -27,7 +27,7 @@ class AfficherUnePageController extends AbstractController
     /**
      * @Route("/entreprises/{id}", name="entreprises")
      */
-    public function indexEntreprise(): Response
+    public function indexEntreprise($id): Response
     {   
         $repositoryEntreprise = $this->getDoctrine()->getRepository(Entreprise::class);
         $entreprise=$repositoryEntreprise->Find($id);
@@ -35,7 +35,6 @@ class AfficherUnePageController extends AbstractController
         $repositoryStages=$this->getDoctrine()->getRepository(Stage::class);
         $listeStages=$repositoryStages->FindBy(["entreprise"=>$id]);
         return $this->render('entreprises/index.html.twig', [
-            'controller_name' => 'Cette page affichera la liste des entreprises proposant un stage',
             'titreEntreprise'=>$titreEntreprise,
             'listeStages'=>$listeStages,
             

@@ -95,7 +95,7 @@ class Stage
     {
         return $this->entreprise;
     }
-
+    
     public function setEntreprise(?Entreprise $entreprise): self
     {
         $this->entreprise = $entreprise;
