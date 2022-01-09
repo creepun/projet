@@ -19,9 +19,12 @@ class AfficherUnePageController extends AbstractController
     {
         $repositoryStage=$this->getDoctrine()->getRepository(Stage::class);
         $stages=$repositoryStage->findAll();
+        $repositoryFormation=$this->getDoctrine()->getRepository(Formation::class);
+        $formations=$repositoryFormation->findAll();
         return $this->render('afficher_une_page/index.html.twig', [
             'controller_name' => 'Bienvenue sur la page d\'accueil de Prostages',
             'stages'=>$stages,
+            'formations'=>$formations,
         ]);
     }
     /**

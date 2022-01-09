@@ -13,8 +13,8 @@
 
     <div class="milieu">
         <ul>
-          <li><code><a href="/entreprises">Trier par entreprise</a></code></li>
-          <li><code><a href="/formations">Trier par formation</a></code></li>
+          <li><p>cliquer sur le nom d'une entreprise pour trier pour voir la liste de ses stages</p></li>
+          <li><p>cliquer sur le nom d'une formation pour trier pour voir la liste de ses stages</p></li>
         
          </ul>
     </div> 
@@ -28,9 +28,18 @@
                 <div class="boutonTitre">
                 <h2><a href="/entreprises/{{stage.getEntreprise().getId()}}"> {{stage.getEntreprise().getNom()}}
                 </a></h2>
+                </div>
                 <div class="descriptifStage"><p>{{stage.getDescription()}}</p></div>
-                <div class="bouton">
-                <a href="/stages_id/{{stage.getId}}"> {{stage.getTitre()}}
+                {% for formation in formations %}
+                    {% if stage.getFormations() == formation%}
+                        <div class="boutonFormation">
+                        <h2><a href="/entreprises/{{stage.getFormations().getId()}}"> {{stage.getFormation().getNomCourt()}}
+                        </a></h2>
+                        </div>
+                    {%endif%}
+                {%endfor%}
+                <div class="boutonStage">
+                <a href="/stages_id/{{stage.getId()}}"> {{stage.getTitre()}}
                 </a>
                 </div>
 
