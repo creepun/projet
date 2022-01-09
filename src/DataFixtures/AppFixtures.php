@@ -4,9 +4,9 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use APP\Entity\Entreprise;
-use APP\Entity\Formation;
-use APP\Entity\Stage;
+use App\Entity\Entreprise;
+use App\Entity\Formation;
+use App\Entity\Stage;
 
 class AppFixtures extends Fixture
 {
@@ -33,41 +33,48 @@ class AppFixtures extends Fixture
         }
 
         $nbEntrepriseAGenerer = $faker->numberBetween($min = 4, $max = 25);
-        for ($numRessource=0; $numRessource < $nbEntrepriseAGenerer; $numRessource++) {
+        for ($numEntreprise=0; $numEntreprise < $nbEntrepriseAGenerer; $numEntreprise++) {
             $entreprise = new Entreprise();
-            $entreprise = setNom($faker->company);
-            $entreprise = setActivité($faker->realText($maxNbChars = 200, $indexSize = 2));
-            $entreprise = setAdresse($faker->address);
-            $entreprise = setURLSite($faker->domainName);
+            $entreprise -> setNom($faker->company);
+            $entreprise -> setActivité($faker->realText($maxNbChars = 200, $indexSize = 2));
+            $entreprise -> setAdresse($faker->address);
+            $entreprise -> setURLSite($faker->domainName);
             
             $nbStageAGenerer = $faker->numberBetween($min = 0, $max = 10);
-            for ($numRessource=0; $numRessource < $nbStageAGenerer; $numRessource++){
+            for ($numStage=0; $numStage < $nbStageAGenerer; $numStage++){
                 $stage = new Stage();
-                $stage = setTitre($faker->jobTitle);
-                $stage = setDescription($faker->realText($maxNbChars = 200, $indexSize = 2));
-                $stage = setEmail($faker->email);
-                $stage = addEntreprise($entreprise);
+                $stage -> setTitre($faker->realText($maxNbChars = 40, $indexSize = 2));
+                $stage -> setDescription($faker->realText($maxNbChars = 200, $indexSize = 2));
+                $stage -> setEmail($faker->email);
+                $stage -> setEntreprise($entreprise);
                 
                 $numFormation = $faker->numberBetween($min = 1, $max = 3);
                 switch ($numFormation){
                     case 1:
                         $stage->addFormation($DUTInfo);
-                        $$DUTInfo->addStage($stage);
+                        $DUTInfo->addStage($stage);
                         break;
                     case 2:
-                        echo "i égal 1";
+                        $stage->addFormation($DUTIC);
+                        $DUTIC->addStage($stage);
                         break;
                     case 3:
-                        echo "i égal 2";
+                        $stage->addFormation($DUTInfo);
+                        $DUTInfo->addStage($stage);
+                        $stage->addFormation($DUTIC);
+                        $DUTIC->addStage($stage);
                         break;
                 }
+                $entreprise->addStage($stage);
+                $manager->persist($stage);
             }
-            $entreprise->addStage($stage);
-            $manager->persist($stage);
+            
+            $manager->persist($entreprise);
         }
         
-        $manager->persist($entreprise);
-        
+       
+        $manager->persist($DUTIC);
+        $manager->persist($DUTInfo);
         $manager->flush();
     }
 }

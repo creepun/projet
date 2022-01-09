@@ -20,20 +20,20 @@
     </div> 
     <div class="bas">
         <h1>Voici les stages disponibles</h1>
-        {#{% for stage in Stage %}#}
+        {% for stage in stages %}
         <ul>
              <li>
                 <div class="stage">
-                <div class="nomStage"><h2>{#stage.nom#}</h2></div>
-                <div class="descriptifStage"><p>{#stage.descriptif#}</p></div>
+                <div class="nomStage"><h2>{{stage.getTitre()}}</h2></div>
+                <div class="descriptifStage"><p>{{stage.getDescription()}}</p></div>
                 <div class="bouton">
-                {#<a href="/stages_id/{{stage.id}}"> {{stage.nom}}#}
+                <a href="/stages_id/{{stage.getId}}"> {{stage.getTitre()}}
                 </a>
                 </div>
 
              </li>
         </ul>
-        {#{%endfor%}#}
+        {%endfor%}
     </div>
 </div>
 {% endblock %}

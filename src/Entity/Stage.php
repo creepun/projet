@@ -46,6 +46,10 @@ class Stage
         return $this;
     }
 
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
     public function getDescription(): ?string
     {
         return $this->description;

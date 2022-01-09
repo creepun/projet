@@ -17,8 +17,11 @@ class AfficherUnePageController extends AbstractController
      */
     public function index(): Response
     {
+        $repositoryStage=$this->getDoctrine()->getRepository(Stage::class);
+        $stages=$repositoryStage->findAll();
         return $this->render('afficher_une_page/index.html.twig', [
             'controller_name' => 'Bienvenue sur la page d\'accueil de Prostages',
+            'stages'=>$stages,
         ]);
     }
     /**
@@ -28,6 +31,7 @@ class AfficherUnePageController extends AbstractController
     {
         return $this->render('entreprises/index.html.twig', [
             'controller_name' => 'Cette page affichera la liste des entreprises proposant un stage',
+            
         ]);
     }
     /**
@@ -49,7 +53,7 @@ class AfficherUnePageController extends AbstractController
        
     }
     /**
-     * @Route("/entreprises/{id},name=liste_stages_par_entreprise")
+     * @Route("/entreprises/{id}",name="liste_stages_par_entreprise")
      */
     public function liste_stages_par_entreprise($id)
     {
@@ -60,8 +64,9 @@ class AfficherUnePageController extends AbstractController
         $listeStages=$repositoryStages->FindBy(["entreprise"=>$id]);
         return $this->render('templates/entreprises/index.html.twig',['titreEntreprise'=>$titreEntreprise,'listeStages'=>$listeStages]);
     }
+    
     /**
-     * @Route("/formations/{id},name=liste_stages_par_formation")
+     * @Route("/formations/{id}",name="liste_stages_par_formation")
      */
     public function liste_stages_par_formation($id)
     {
@@ -70,16 +75,16 @@ class AfficherUnePageController extends AbstractController
         $titreFormation=$formation->getNom();
         $repositoryStages=$this->getDoctrine()->getRepository(Stage::class);
         $listeStages=$repositoryStages->FindBy(["formation"=>$id]);
-        return $this->render('templates/formations/index.html.twig',['titreFormation'=>$titreEntreprise,'listeStages'=>$listeStages]);
+        return $this->render('templates/formations/index.html.twig',['titreFormation'=>$titreFormation,'listeStages'=>$listeStages]);
     }
     /**
-     * @Route("/stages/{id},name=stage_selectionner")
+     * @Route("/stages/{id}",name="stage_selectionner")
      */
     public function stage_selectionner($id)
     {
         $repositoryStages=$this->getDoctrine()->getRepository(Stage::class);
         $stage=$repositoryStages->FindBy(["stage"=>$id]);
-        return $this->render('templates/stages_id/index.html.twig',['titrestage'=>$titreEntreprise,'Stage'=>$Stage]);
+        return $this->render('templates/stages_id/index.html.twig',['Stage'=>$Stage]);
     }
 }
 
