@@ -19,12 +19,9 @@ class AfficherUnePageController extends AbstractController
     {
         $repositoryStage=$this->getDoctrine()->getRepository(Stage::class);
         $stages=$repositoryStage->findAll();
-        $repositoryFormation=$this->getDoctrine()->getRepository(Formation::class);
-        $formations=$repositoryFormation->findAll();
         return $this->render('afficher_une_page/index.html.twig', [
             'controller_name' => 'Bienvenue sur la page d\'accueil de Prostages',
             'stages'=>$stages,
-            'formations'=>$formations,
         ]);
     }
     /**
@@ -44,12 +41,18 @@ class AfficherUnePageController extends AbstractController
         ]);
     }
     /**
-     * @Route("/formations", name="formations")
+     * @Route("/formations/{id}", name="formations")
      */
-    public function indexFormation(): Response
-    {
+    public function indexFormation($id): Response
+    {   
+        $repositoryFormation = $this->getDoctrine()->getRepository(Formation::class);
+        $formation=$repositoryFormation->Find($id);
+        $titreFormation=$formation->getNomLong();
+        $listeStages=$formation->getStages();
         return $this->render('formations/index.html.twig', [
             'controller_name' => 'Cette page affichera la liste des formations de l\'IUT',
+            'titreFormation'=>$titreFormation,
+            'listeStages'=>$listeStages
         ]);
     }
     /**
@@ -63,18 +66,6 @@ class AfficherUnePageController extends AbstractController
     }
     
     
-    /**
-     * @Route("/formations/{id}",name="liste_stages_par_formation")
-     */
-    public function liste_stages_par_formation($id)
-    {
-        $repositoryFormation = $this->getDoctrine()->getRepository(Formation::class);
-        $formation=$repositoryFormation->Find($id);
-        $titreFormation=$formation->getNom();
-        $repositoryStages=$this->getDoctrine()->getRepository(Stage::class);
-        $listeStages=$repositoryStages->FindBy(["formation"=>$id]);
-        return $this->render('templates/formations/index.html.twig',['titreFormation'=>$titreFormation,'listeStages'=>$listeStages]);
-    }
     /**
      * @Route("/stages/{id}",name="stage_selectionner")
      */

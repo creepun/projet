@@ -30,13 +30,13 @@
                 </a></h2>
                 </div>
                 <div class="descriptifStage"><p>{{stage.getDescription()}}</p></div>
-                {% for formation in formations %}
-                    {% if stage.getFormations() == formation%}
+                {% for formation in stage.getFormations() %}
+                        
                         <div class="boutonFormation">
-                        <h2><a href="/entreprises/{{stage.getFormations().getId()}}"> {{stage.getFormation().getNomCourt()}}
+                        <h2><a href="/formations/{{formation.getId()}}"> {{formation.getNomCourt()}}
                         </a></h2>
                         </div>
-                    {%endif%}
+                        
                 {%endfor%}
                 <div class="boutonStage">
                 <a href="/stages_id/{{stage.getId()}}"> {{stage.getTitre()}}

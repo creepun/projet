@@ -13,20 +13,20 @@
 
     <div class="formationStage">
         <h1>Voici les stages disponibles</h1>
-        {#{% for stage in Stage.formations %}#}
+        {% for stage in listeStages %}
         <ul>
              <li>
                 <div class="bouton">
-                        {#<a href="/stages_id/{{Stage.id}}"> {{Stage.nom}}#}
+                        <a href="/stages_id/{{stage.getId()}}"> {{stage.getTitre()}}
                         </a>
                     </div>
-                    <div class="nomStage"><h2>{#Stage.nom#}</h2></div>
-                    <div class="descriptifStage"><p>{#Stage.descriptif#}</p></div>
+                    <div class="nomStage"><h2>{{stage.getTitre()}}</h2></div>
+                    <div class="descriptifStage"><p>{{stage.getDescription()}}</p></div>
                 
                 </div>
              </li>
         </ul>
-        {#{%endfor%}#}
+        {%endfor%}
     </div>
 </div>
 {% endblock %}
