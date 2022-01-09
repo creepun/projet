@@ -59,22 +59,16 @@ class AfficherUnePageController extends AbstractController
      * @Route("/stages/{id}", name="stages_i_d")
      */
     public function indexStage($id): Response
-    {
+    {   
+        $repositoryStages=$this->getDoctrine()->getRepository(Stage::class);
+        $stage=$repositoryStages->Find($id);
         return $this->render('stages_id/index.html.twig', 
-        ['controller_name' =>$id]);
+        ['controller_name' =>$id,
+        'stage'=>$stage,
+    ]);
        
     }
     
-    
-    /**
-     * @Route("/stages/{id}",name="stage_selectionner")
-     */
-    public function stage_selectionner($id)
-    {
-        $repositoryStages=$this->getDoctrine()->getRepository(Stage::class);
-        $stage=$repositoryStages->FindBy(["stage"=>$id]);
-        return $this->render('templates/stages_id/index.html.twig',['Stage'=>$Stage]);
-    }
 }
 
 

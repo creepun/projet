@@ -9,8 +9,19 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>  'Cette page affichera le descriptif du stage ayant pour identifiant {{controller_name}}' </h1>
-    <h1> '{#{{Stage.nom}}#} </h1>
-    <p> '{#{{Stage.descriptif}}#} </p>
+    
+    <h1> {{stage.getTitre()}} </h1>
+    <p> {{stage.getDescription()}} </p>
+    <p> {{stage.getEmail()}} </p>
+    {% for formation in stage.getFormations() %}
+                        
+        <h3>{{formation.getNomLong()}}</h3>
+                        
+    {%endfor%}
+    <p> {{stage.getEntreprise().getURLSite()}} </p>
+
+    
+
+    <h9>  Cette page affiche le  stage ayant pour identifiant {{controller_name}} </h9>
 </div>
 {% endblock %}
