@@ -25,12 +25,19 @@ class AfficherUnePageController extends AbstractController
         ]);
     }
     /**
-     * @Route("/entreprises", name="entreprises")
+     * @Route("/entreprises/{id}", name="entreprises")
      */
     public function indexEntreprise(): Response
-    {
+    {   
+        $repositoryEntreprise = $this->getDoctrine()->getRepository(Entreprise::class);
+        $entreprise=$repositoryEntreprise->Find($id);
+        $titreEntreprise=$entreprise->getNom();
+        $repositoryStages=$this->getDoctrine()->getRepository(Stage::class);
+        $listeStages=$repositoryStages->FindBy(["entreprise"=>$id]);
         return $this->render('entreprises/index.html.twig', [
             'controller_name' => 'Cette page affichera la liste des entreprises proposant un stage',
+            'titreEntreprise'=>$titreEntreprise,
+            'listeStages'=>$listeStages,
             
         ]);
     }
@@ -52,18 +59,7 @@ class AfficherUnePageController extends AbstractController
         ['controller_name' =>$id]);
        
     }
-    /**
-     * @Route("/entreprises/{id}",name="liste_stages_par_entreprise")
-     */
-    public function liste_stages_par_entreprise($id)
-    {
-        $repositoryEntreprise = $this->getDoctrine()->getRepository(Entreprise::class);
-        $entreprise=$repositoryEntreprise->Find($id);
-        $titreEntreprise=$entreprise->getNom();
-        $repositoryStages=$this->getDoctrine()->getRepository(Stage::class);
-        $listeStages=$repositoryStages->FindBy(["entreprise"=>$id]);
-        return $this->render('templates/entreprises/index.html.twig',['titreEntreprise'=>$titreEntreprise,'listeStages'=>$listeStages]);
-    }
+    
     
     /**
      * @Route("/formations/{id}",name="liste_stages_par_formation")

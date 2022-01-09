@@ -11,21 +11,21 @@
 <div class="entreprise">
     <h1> {{ controller_name }}! </h1>
     <div class="entrepriseStage">
-        <h1>Voici les stages disponibles pour cette entreprise</h1>
-        {#{% for stage in Entreprise.stage %}#}
+        <h1>Voici les stages disponibles pour {{titreEntreprise}}</h1>
+        {% for stage in listeStages %}
         <ul>
              <li>
                 <div class="stage">
                     <div class="bouton">
-                        {#<a href="/stages_id/{{stage.id}}"> {{stage.nom}}#}
+                        <a href="/stages_id/{{stage.getId}}"> {{stage.getTitre}}
                         </a>
                     </div>
-                    <div class="descriptifStage"><p>{#stage.descriptif#}</p></div>
+                    <div class="descriptifStage"><p>{{stage.getDescription}}</p></div>
                 
                 </div>
              </li>
         </ul>
-        {#{%endfor%}#}
+        {%endfor%}
     </div>
 </div>
 {% endblock %}
