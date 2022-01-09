@@ -16,21 +16,30 @@ class AppFixtures extends Fixture
         // $manager->persist($product);
         
         $faker = \Faker\Factory::create('fr_FR');
-
-        $stage= new TypeRessource();
-        $stage = setNomType("stage");
-        
-        $entreprise= new TypeRessource();
-        $entreprise = setNomType("entreprise");
-        
+ 
         $DUTInfo = new Formation();
         $DUTInfo->setNomCourt("DUT INFO");
         $DUTInfo->setNomLong("DUT Informatique");
        
-        $DUTGea = new Formation();
-        $DUTGea->setNomCourt("DU TIC");
-        $DUTGea->setNomLong("DU Technologies de l'Information et de la Communication");
+        $DUTIC = new Formation();
+        $DUTIC->setNomCourt("DU TIC");
+        $DUTIC->setNomLong("DU Technologies de l'Information et de la Communication");
+        
+        $tableauDesFormations = array($DUTInfo, $DUTIC);
 
+        foreach($tableauDesFormations as $tabFormations)
+        {
+            $manager->persist($tabFormations);
+        }
+
+        $nbRessourcesAGenerer = $faker->numberBetween($min = 4, $max = 25);
+        for ($numRessource=0; $numRessource < $nbRessourcesAGenerer; $numRessource++) {
+            $ressource = new Ressource();
+            $ressource = setNom($faker->company);
+            $ressource = setActivité($faker->realText($maxNbChars = 200, $indexSize = 2));
+            $ressource = setAdresse($faker->address);
+            $ressource = setURLSite($faker->domainName);
+        }
         $manager->flush();
     }
 }
